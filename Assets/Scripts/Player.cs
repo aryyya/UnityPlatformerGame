@@ -32,6 +32,7 @@ public class Player : MonoBehaviour
 
         // Jump movement.
         bool isGrounded = IsGrounded();
+        _rigidbody.gravityScale = isGrounded && deltaX == 0 ? 0 : 1;
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
