@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     // Inspector fields.
     [SerializeField] private float _speed = 250.0f;
+    [SerializeField] private float _jumpForce = 12.0f;
 
     // Components.
     private Rigidbody2D _body;
@@ -23,9 +24,15 @@ public class Player : MonoBehaviour
         // Input.
         float deltaX = Input.GetAxis("Horizontal") * _speed * Time.deltaTime;
 
-        // Velocity.
+        // Horizontal movement.
         Vector2 movement = new Vector2(deltaX, _body.velocity.y);
         _body.velocity = movement;
+
+        // Jump movement.
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            _body.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+        }
 
         // Animation.
         _animator.SetFloat("speed", Mathf.Abs(deltaX));
