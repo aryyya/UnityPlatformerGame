@@ -31,13 +31,7 @@ public class Player : MonoBehaviour
         _rigidbody.velocity = movement;
 
         // Jump movement.
-        Vector3 max = _boxCollider.bounds.max;
-        Vector3 min = _boxCollider.bounds.min;
-        Vector2 corner1 = new Vector2(max.x, min.y - 0.1f);
-        Vector2 corner2 = new Vector2(min.x, min.y - 0.2f);
-        Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
-        bool isGrounded = hit != null;
-
+        bool isGrounded = IsGrounded();
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
@@ -49,5 +43,15 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
+    }
+
+    private bool IsGrounded()
+    {
+        Vector3 max = _boxCollider.bounds.max;
+        Vector3 min = _boxCollider.bounds.min;
+        Vector2 corner1 = new Vector2(max.x, min.y - 0.1f);
+        Vector2 corner2 = new Vector2(min.x, min.y - 0.2f);
+        Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
+        return hit != null;
     }
 }
