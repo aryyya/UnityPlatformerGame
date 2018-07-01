@@ -46,9 +46,6 @@ public class Player : MonoBehaviour
         {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
-
-        Debug.Log("isGrounded: " + isGrounded);
-        Debug.Log("speed: " + Mathf.Abs(deltaX));
     }
 
     private bool IsGrounded()
