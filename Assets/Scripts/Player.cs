@@ -38,12 +38,17 @@ public class Player : MonoBehaviour
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
 
-        // Animation.
+        // Animations.
+        _animator.SetFloat("velocityY", _rigidbody.velocity.y);
+        _animator.SetBool("isGrounded", isGrounded);
         _animator.SetFloat("speed", Mathf.Abs(deltaX));
         if (!Mathf.Approximately(deltaX, 0))
         {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
+
+        Debug.Log("isGrounded: " + isGrounded);
+        Debug.Log("speed: " + Mathf.Abs(deltaX));
     }
 
     private bool IsGrounded()
