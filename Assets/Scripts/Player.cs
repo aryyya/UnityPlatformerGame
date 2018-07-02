@@ -44,13 +44,16 @@ public class Player : MonoBehaviour
         MovingPlatform platform = bottomHit ? bottomHit.GetComponent<MovingPlatform>() : null;
         transform.parent = platform ? platform.transform : null;
 
+        // Platform scaling.
+        Vector3 platformScale = platform ? platform.transform.localScale : Vector3.one;
+        
         // Animations.
         _animator.SetFloat("velocityY", _rigidbody.velocity.y);
         _animator.SetBool("isGrounded", isGrounded);
         _animator.SetFloat("speed", Mathf.Abs(deltaX));
         if (!Mathf.Approximately(deltaX, 0))
         {
-            transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
+            transform.localScale = new Vector3(Mathf.Sign(deltaX) / platformScale.x, 1 / platformScale.y, 1);
         }
     }
 
