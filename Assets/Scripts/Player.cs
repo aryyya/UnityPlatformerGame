@@ -30,13 +30,19 @@ public class Player : MonoBehaviour
         Vector2 movement = new Vector2(deltaX, _rigidbody.velocity.y);
         _rigidbody.velocity = movement;
 
+        Collider2D bottomHit = GetBottomHit();
+
         // Jump movement.
-        bool isGrounded = IsGrounded();
+        bool isGrounded = bottomHit != null;
         _rigidbody.gravityScale = isGrounded && deltaX == 0 ? 0 : 1;
         if (isGrounded && Input.GetKeyDown(KeyCode.Space))
         {
             _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
         }
+
+        // Platform movement.
+        MovingPlatform platform = bottomHit ? bottomHit.GetComponent<MovingPlatform>() : null;
+        transform.parent = platform ? platform.transform : null;
 
         // Animations.
         _animator.SetFloat("velocityY", _rigidbody.velocity.y);
@@ -48,13 +54,12 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
+    private Collider2D GetBottomHit()
     {
         Vector3 max = _boxCollider.bounds.max;
         Vector3 min = _boxCollider.bounds.min;
         Vector2 corner1 = new Vector2(max.x, min.y - 0.1f);
         Vector2 corner2 = new Vector2(min.x, min.y - 0.2f);
-        Collider2D hit = Physics2D.OverlapArea(corner1, corner2);
-        return hit != null;
+        return Physics2D.OverlapArea(corner1, corner2);
     }
 }
