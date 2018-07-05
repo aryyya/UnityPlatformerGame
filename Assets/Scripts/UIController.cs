@@ -7,6 +7,12 @@ public class UIController : MonoBehaviour
 {
     // Inspector.
     [SerializeField] private Text _scoreLabel;
+    [SerializeField] private SettingsPopup _settingsPopup;
+
+    void Start()
+    {
+        _settingsPopup.Close();
+    }
 
     private void Update()
     {
@@ -15,6 +21,6 @@ public class UIController : MonoBehaviour
 
     public void OnOpenSettings()
     {
-        Debug.Log("Open Settings");
+        _settingsPopup.Open();
     }
 }
