@@ -1,9 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingsPopup : MonoBehaviour
 {
+    // Inspector.
+    [SerializeField] private Slider _gravitySlider;
+
+    private void Start()
+    {
+        _gravitySlider.value = PlayerPrefs.GetFloat("gravity");
+    }
+
     public void Open()
     {
         gameObject.SetActive(true);
@@ -16,6 +25,6 @@ public class SettingsPopup : MonoBehaviour
 
     public void OnSpeedValue(float speed)
     {
-        Debug.Log("Speed: " + speed);
+        PlayerPrefs.SetFloat("gravity", speed);
     }
 }

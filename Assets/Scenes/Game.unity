@@ -2651,7 +2651,7 @@ GameObject:
   - component: {fileID: 561915147}
   - component: {fileID: 561915148}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: GravitySlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7858,6 +7858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c12983c2a32b08a4c975a06185743293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _gravitySlider: {fileID: 561915148}
 --- !u!1 &1506867859
 GameObject:
   m_ObjectHideFlags: 0
