@@ -65,4 +65,9 @@ public class Player : MonoBehaviour
         Vector2 corner2 = new Vector2(min.x, min.y - 0.2f);
         return Physics2D.OverlapArea(corner1, corner2);
     }
+
+    public void SetMass(float mass)
+    {
+        _rigidbody.mass = mass;
+    }
 }
