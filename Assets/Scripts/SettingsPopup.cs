@@ -13,4 +13,9 @@ public class SettingsPopup : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
+
+    public void OnSpeedValue(float speed)
+    {
+        Debug.Log("Speed: " + speed);
+    }
 }
